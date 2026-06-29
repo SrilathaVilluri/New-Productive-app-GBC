@@ -5387,6 +5387,7 @@
     function exportData() {
         var out = {};
         SYNCED_KEYS.forEach(function(k) {
+            if (k === 'app_config') return;
             try { var v = localStorage.getItem(k); if (v) out[k] = JSON.parse(v); } catch(e) {}
         });
         out._exported = new Date().toISOString();
@@ -5408,6 +5409,7 @@
                 var data = JSON.parse(e.target.result);
                 var count = 0;
                 SYNCED_KEYS.forEach(function(k) {
+                    if (k === 'app_config') return;
                     if (data[k] !== undefined) {
                         try { localStorage.setItem(k, JSON.stringify(data[k])); count++; } catch(er) {}
                     }
